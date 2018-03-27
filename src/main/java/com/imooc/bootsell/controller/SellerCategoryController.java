@@ -41,8 +41,6 @@ public class SellerCategoryController {
     @RequestMapping(value = "/save", method = RequestMethod.POST, produces = StaticUtil.APPLICATION_JSON_UTF8_VALUE)
     public ResultVo<ProductCategory> save(@RequestBody CategoryForm categoryForm) {
         ProductCategory productCategory1 = new ProductCategory();
-        productCategory1.setCreateTime(new Date());
-        productCategory1.setUpdateTime(new Date());
         BeanUtils.copyProperties(categoryForm, productCategory1);
         return ResultVoUtil.success(this.categoryService.save(productCategory1));
 

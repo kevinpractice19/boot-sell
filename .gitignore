@@ -23,3 +23,8 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+.target
+.classes
+.generated-sources
+.generated-test-sources
+.test-classes

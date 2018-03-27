@@ -9,10 +9,10 @@ public interface OrderMasterRepository
         extends JpaRepository<OrderMaster, String> {
 
     /**
-     * @param buyerOpenId
+     * @param buyerOpenid
      * @param pageable
      * @return
      */
-    Page<OrderMaster> findOrderMastersByBuyerOpenId(String buyerOpenId, Pageable pageable);
+    Page<OrderMaster> findOrderMastersByBuyerOpenid(String buyerOpenid, Pageable pageable);
 
 }

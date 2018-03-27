@@ -24,7 +24,7 @@ public class OrderMaster {
 
     private String buyerAddress;
 
-    private String buyerOpenId;
+    private String buyerOpenid;
 
     private BigDecimal orderAmount;  //订单总金额
 
@@ -32,8 +32,8 @@ public class OrderMaster {
 
     private Integer pay_status = PayStatusEnum.WAIT.getCode();     /** 状态, 默认0未支付. */
 
-    private Date createTime;
-
-    private Date updateTime;
+//    private Date createTime;
+//
+//    private Date updateTime;
 
 }

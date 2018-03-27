@@ -6,6 +6,7 @@ import com.imooc.bootsell.entity.OrderDetail;
 import com.imooc.bootsell.enums.OrderStatusEnum;
 import com.imooc.bootsell.enums.PayStatusEnum;
 import com.imooc.bootsell.utils.EnumUtil;
+import com.imooc.bootsell.utils.serializer.Date2LongSerializer;
 import com.sun.org.apache.regexp.internal.RE;
 import lombok.Data;
 import lombok.Getter;
@@ -27,7 +28,7 @@ public class OrderDTO {
 
     private String buyerAddress;
 
-    private String buyerOpenId;
+    private String buyerOpenid;
 
     private String orderAmount;
 
@@ -35,8 +36,10 @@ public class OrderDTO {
 
     private Integer payStatus;
 
+    @JsonSerialize(using = Date2LongSerializer.class)
     private Date createTime;
 
+    @JsonSerialize(using = Date2LongSerializer.class)
     private Date updateTime;
 
     List<OrderDetail> orderDetailList;
