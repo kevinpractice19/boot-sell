@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/buyer/order")
+@RequestMapping("/order")
 @Slf4j
 public class BuyerOrderController {
 
@@ -49,8 +49,5 @@ public class BuyerOrderController {
     }
 
 
-//    @RequestMapping(value = "/findOne", method = RequestMethod.GET, produces = StaticUtil.APPLICATION_JSON_UTF8_VALUE)
-//    public ResultVo<OrderMaster> findOne(){
-//
-//    }
+
 }

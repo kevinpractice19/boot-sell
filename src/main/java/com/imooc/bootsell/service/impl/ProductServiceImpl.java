@@ -69,12 +69,12 @@ public class ProductServiceImpl implements ProductService {
             throw new SellException(ResultEnum.PRODUCT_STATUS_ERROR);
         }
         productInfo.setProductStatus(ProductStatusEnum.DOWN.getCode());
-        //更行商品状态
+        //更新商品状态
         return this.repository.save(productInfo);
     }
 
     /**
-     * 添加库存
+     * 减库存
      *
      * @param dtoList
      */
@@ -85,7 +85,7 @@ public class ProductServiceImpl implements ProductService {
             if (productInfo == null) {
                 throw new SellException(ResultEnum.PRODUCT_NOT_EXISTS);
             }
-            Integer result = productInfo.getProductStock() + cartDTO.getProductQuantity();
+            Integer result = productInfo.getProductStock() - cartDTO.getProductQuantity();
             productInfo.setProductStock(result);
             //更新库存
             this.repository.save(productInfo);
@@ -93,7 +93,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     /**
-     * 减库存
+     * 加库存
      *
      * @param dtoList
      */
