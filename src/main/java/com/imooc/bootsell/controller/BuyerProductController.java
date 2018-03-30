@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = "/buyerProduct")
+@RequestMapping(value = "/buyer/Product")
 public class BuyerProductController {
 
     @Autowired

@@ -19,6 +19,11 @@ public class ProductServiceImpl implements ProductService {
     private ProductInfoRepository repository;
 
     @Override
+    public ProductInfo save(ProductInfo productInfo) {
+        return this.repository.save(productInfo);
+    }
+
+    @Override
     public ProductInfo findOne(String productId) {
         return this.repository.findOne(productId);
     }

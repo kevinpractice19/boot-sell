@@ -1,5 +1,6 @@
 package com.imooc.bootsell.service.impl;
 
+import com.imooc.bootsell.converter.OrderMaster2OrderDTOConverter;
 import com.imooc.bootsell.dto.CartDTO;
 import com.imooc.bootsell.dto.OrderDTO;
 import com.imooc.bootsell.entity.OrderDetail;
@@ -19,6 +20,9 @@ import com.imooc.bootsell.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -45,6 +49,13 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private WebSocket webSocket;
+
+    /**
+     * 创建订单
+     *
+     * @param orderDTO
+     * @return
+     */
 
     @Override
     public OrderDTO createOrder(OrderDTO orderDTO) {
@@ -100,6 +111,47 @@ public class OrderServiceImpl implements OrderService {
         BeanUtils.copyProperties(orderMaster, orderDTO);
         orderDTO.setOrderDetailList(orderDetailList);
         return orderDTO;
+    }
+
+    @Override
+    public OrderDTO cancel(OrderDTO orderDTO) {
+        //查询订单状态
+        OrderMaster orderMaster = new OrderMaster();
+        if (orderDTO.getOrderStatus().equals(OrderStatusEnum.CANCEL)) {
+            log.error("[检查订单状态]订单状态不正确,orderStatus", orderDTO.getOrderStatus());
+            throw new SellException(ResultEnum.ORDER_STATUS_ERROR);
+        }
+
+        //取消订单
+        orderDTO.setOrderStatus(OrderStatusEnum.CANCEL.getCode());
+        BeanUtils.copyProperties(orderDTO, orderMaster);
+        OrderMaster orderMasterResult = masterRepository.save(orderMaster);
+        if (orderMasterResult == null) {
+            log.error("[取消订单]取消订单失败,orderMasterResult={}", orderMasterResult);
+            throw new SellException(ResultEnum.ORDER_UPDATE_FAIL);
+        }
+        //返回库存
+
+        if (CollectionUtils.isEmpty(orderDTO.getOrderDetailList())) {
+            log.error("[取消订单]订单中没有商品详情,orderDTO={}", orderDTO);
+            throw new SellException(ResultEnum.ORDER_DETAIL_EMPTY);
+        }
+        List<CartDTO> cartDTOList = orderDTO.getOrderDetailList().stream()
+                .map(orderDetail -> new CartDTO(orderDetail.getProductId(), orderDetail.getProductQuantity()))
+                .collect(Collectors.toList());
+
+        //如果已经支付,需要退款
+        if (orderDTO.getPayStatus().equals(PayStatusEnum.SUCCESS.getCode())) {
+//            paryService.refund(orderDTO);
+        }
+        return orderDTO;
+    }
+
+    @Override
+    public Page<OrderDTO> findList(String buyerOpenid, Pageable pageable) {
+        Page<OrderMaster> dtoPage = this.masterRepository.findOrderMastersByBuyerOpenid(buyerOpenid, pageable);
+        List<OrderDTO> orderDTOList = OrderMaster2OrderDTOConverter.convert(dtoPage.getContent());
+        return new PageImpl<OrderDTO>(orderDTOList, pageable, dtoPage.getTotalElements());
     }
 
 

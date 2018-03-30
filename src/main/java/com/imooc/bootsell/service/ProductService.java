@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface ProductService {
 
+    ProductInfo save(ProductInfo productInfo);
+
 
     ProductInfo findOne(String productId);
 
