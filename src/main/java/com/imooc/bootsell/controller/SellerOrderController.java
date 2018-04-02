@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/sellOrder")
+@RequestMapping(value = "/seller/sellOrder")
 @Slf4j
 public class SellerOrderController {
 

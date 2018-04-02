@@ -27,8 +27,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 买家订单
+ */
 @RestController
-@RequestMapping("/order")
+@RequestMapping("/buyer/order")
 @Slf4j
 public class BuyerOrderController {
 

@@ -28,7 +28,7 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/seller/product")
 public class SellerProductController {
 
     @Autowired

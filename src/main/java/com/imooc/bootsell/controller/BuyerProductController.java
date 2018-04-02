@@ -19,6 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * 买家商品
+ */
 @RestController
 @RequestMapping(value = "/buyer/Product")
 public class BuyerProductController {
