@@ -2,6 +2,8 @@ package com.imooc.bootsell.service;
 
 import com.imooc.bootsell.dto.CartDTO;
 import com.imooc.bootsell.entity.ProductInfo;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -9,10 +11,9 @@ public interface ProductService {
 
     ProductInfo save(ProductInfo productInfo);
 
-
     ProductInfo findOne(String productId);
 
-    List<ProductInfo> findAll();
+    Page<ProductInfo> findAll(Pageable pageable);
 
     /**
      * 查询所有的在架商品

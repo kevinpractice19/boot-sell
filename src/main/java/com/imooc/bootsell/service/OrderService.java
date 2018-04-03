@@ -14,4 +14,11 @@ public interface OrderService {
     OrderDTO cancel(OrderDTO orderDTO);
 
     Page<OrderDTO> findList(String buyerOpenid, Pageable pageable);
+
+    /** 查询订单列表. */
+    Page<OrderDTO> findList(Pageable pageable);
+
+    /** 完结订单. */
+    OrderDTO finish(OrderDTO orderDTO);
+
 }

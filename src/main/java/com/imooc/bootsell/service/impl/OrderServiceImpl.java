@@ -154,5 +154,29 @@ public class OrderServiceImpl implements OrderService {
         return new PageImpl<OrderDTO>(orderDTOList, pageable, dtoPage.getTotalElements());
     }
 
+    @Override
+    public Page<OrderDTO> findList(Pageable pageable) {
+        Page<OrderMaster> orderMasterPage = masterRepository.findAll(pageable);
+        List<OrderDTO> orderDTOList = OrderMaster2OrderDTOConverter.convert(orderMasterPage.getContent());
+        return new PageImpl<>(orderDTOList, pageable, orderMasterPage.getTotalElements());
+    }
+
+    @Override
+    public OrderDTO finish(OrderDTO orderDTO) {
+        if (!orderDTO.getOrderStatus().equals(OrderStatusEnum.NEW)) {
+            throw new SellException(ResultEnum.ORDER_STATUS_ERROR);
+        }
+        orderDTO.setOrderStatus(OrderStatusEnum.FINISHED.getCode());
+        OrderMaster orderMaster = new OrderMaster();
+        BeanUtils.copyProperties(orderDTO, orderMaster);
+        OrderMaster updateMaster = this.masterRepository.save(orderMaster);
+        if (updateMaster == null) {
+            throw new SellException(ResultEnum.ORDER_UPDATE_FAIL);
+        }
+        //推送微信消息模版
+//        pushMessageService.orderStatus(orderDTO);
+        return orderDTO;
+    }
+
 
 }

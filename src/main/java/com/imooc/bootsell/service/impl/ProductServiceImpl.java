@@ -8,6 +8,7 @@ import com.imooc.bootsell.exception.SellException;
 import com.imooc.bootsell.repository.ProductInfoRepository;
 import com.imooc.bootsell.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,8 +30,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductInfo> findAll() {
-        return this.repository.findAll();
+    public Page<ProductInfo> findAll(org.springframework.data.domain.Pageable pageable) {
+        return this.repository.findAll(pageable);
     }
 
     @Override
