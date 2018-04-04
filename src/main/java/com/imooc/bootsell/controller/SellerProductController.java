@@ -2,22 +2,17 @@ package com.imooc.bootsell.controller;
 
 import com.imooc.bootsell.entity.ProductCategory;
 import com.imooc.bootsell.entity.ProductInfo;
-import com.imooc.bootsell.enums.ResultEnum;
 import com.imooc.bootsell.exception.SellException;
 import com.imooc.bootsell.form.ProductForm;
 import com.imooc.bootsell.service.CategoryService;
 import com.imooc.bootsell.service.ProductService;
 import com.imooc.bootsell.utils.KeyUtil;
-import com.imooc.bootsell.utils.ResultVoUtil;
 import com.imooc.bootsell.utils.StaticUtil;
-import com.imooc.bootsell.vo.ResultVo;
-import javafx.scene.chart.ValueAxis;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -73,7 +68,7 @@ public class SellerProductController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET, produces = StaticUtil.APPLICATION_JSON_UTF8_VALUE)
     public ModelAndView findAll(@RequestParam(value = "page", defaultValue = "1") Integer page,
-                                @RequestParam(value = "size", defaultValue = "10") Integer size, Map<String, Object> map) {
+                                @RequestParam(value = "size", defaultValue = "5") Integer size, Map<String, Object> map) {
         PageRequest pageRequest = new PageRequest(page - 1, size);
         Page<ProductInfo> productInfoPage = this.productService.findAll(pageRequest);
         map.put("productInfoPage", productInfoPage);

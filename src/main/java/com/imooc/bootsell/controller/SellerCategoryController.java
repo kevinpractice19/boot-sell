@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -35,12 +36,12 @@ public class SellerCategoryController {
      * @return
      */
     @RequestMapping(value = "/findOne", method = RequestMethod.GET, produces = StaticUtil.APPLICATION_JSON_UTF8_VALUE)
-    public ModelAndView findOne(@RequestParam("categoryId") Integer categoryId, Map<String, Object> map) {
+    public ModelAndView findOne(@RequestParam(value = "categoryId", required = false) Integer categoryId, Map<String, Object> map) {
         if (categoryId != null) {
             ProductCategory productCategory = this.categoryService.findOne(categoryId);
             map.put("productCategory", productCategory);
         }
-        return new ModelAndView("/category/index");
+        return new ModelAndView("/category/index", map);
     }
 
     /**
@@ -50,16 +51,16 @@ public class SellerCategoryController {
     public ModelAndView findAll(Map<String, Object> map) {
         List<ProductCategory> categoryList = this.categoryService.findAll();
         map.put("categoryList", categoryList);
-        return new ModelAndView("/category/list");
+        return new ModelAndView("/category/list", map);
     }
 
 
     @RequestMapping(value = "/save", method = RequestMethod.POST, produces = StaticUtil.APPLICATION_JSON_UTF8_VALUE)
-    public ModelAndView save(@RequestBody CategoryForm categoryForm, BindingResult bindingResult, Map<String, Object> map) {
+    public ModelAndView save(@Valid CategoryForm categoryForm, BindingResult bindingResult, Map<String, Object> map) {
         if (bindingResult.hasErrors()) {
             map.put("msg", bindingResult.getFieldError().getDefaultMessage());
-            map.put("url", "/category/findOne");
-            return new ModelAndView("/common/error", map);
+            map.put("url", "/seller/category/findOne");
+            return new ModelAndView("common/error", map);
         }
         ProductCategory productCategory = new ProductCategory();
         try {
@@ -70,11 +71,11 @@ public class SellerCategoryController {
             this.categoryService.save(productCategory);
         } catch (Exception e) {
             map.put("msg", e.getMessage());
-            map.put("url", "/category/findOne");
-            return new ModelAndView("/common/error", map);
+            map.put("url", "/seller/category/findOne");
+            return new ModelAndView("common/error", map);
         }
-        map.put("url", "/category/findAll");
-        return new ModelAndView("/common/success", map);
+        map.put("url", "/seller/category/findAll");
+        return new ModelAndView("common/success", map);
     }
 
 

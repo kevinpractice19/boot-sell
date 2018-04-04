@@ -82,8 +82,8 @@ public class OrderServiceImpl implements OrderService {
             orderDTO.setOrderId(orderId);
             BeanUtils.copyProperties(orderDTO, orderMaster);
             orderMaster.setOrderAmount(orderAmount);
-            orderMaster.setOrder_status(OrderStatusEnum.NEW.getCode());
-            orderMaster.setPay_status(PayStatusEnum.WAIT.getCode());
+            orderMaster.setOrderStatus(OrderStatusEnum.NEW.getCode());
+            orderMaster.setPayStatus(PayStatusEnum.WAIT.getCode());
             masterRepository.save(orderMaster);
 
             List<CartDTO> cartDTOList = orderDTO.getOrderDetailList().stream()

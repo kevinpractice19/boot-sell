@@ -1,8 +1,5 @@
 <html>
 <#include "../common/header.ftl">
-<head>
-    <link href="https://cdn.bootcss.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
-</head>
 
 <body>
 <div id="wrapper" class="toggled">
@@ -18,15 +15,13 @@
                     <form role="form" method="post" action="/seller/category/save">
                         <div class="form-group">
                             <label>名字</label>
-                            <input name="categoryName" type="text" class="form-control"
-                                   value="${(category.categoryName)!''}"/>
+                            <input name="categoryName" type="text" class="form-control" value="${(productCategory.categoryName)!''}"/>
                         </div>
                         <div class="form-group">
                             <label>type</label>
-                            <input name="categoryType" type="number" class="form-control"
-                                   value="${(category.categoryType)!''}"/>
+                            <input name="categoryType" type="number" class="form-control" value="${(productCategory.categoryType)!''}"/>
                         </div>
-                        <input hidden type="text" name="categoryId" value="${(category.categoryId)!''}">
+                        <input hidden type="text" name="categoryId" value="${(productCategory.categoryId)!''}">
                         <button type="submit" class="btn btn-default">提交</button>
                     </form>
                 </div>

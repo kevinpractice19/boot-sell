@@ -35,11 +35,11 @@ public class SellerOrderController {
         map.put("orderDTOPage", orderDTOPage);
         map.put("currentPage", page);
         map.put("size", size);
-        return new ModelAndView("/order/list");
+        return new ModelAndView("/order/list", map);
 
     }
 
-    @RequestMapping(value = "/cancel", method = RequestMethod.POST, produces = StaticUtil.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/cancel", method = RequestMethod.GET, produces = StaticUtil.APPLICATION_JSON_UTF8_VALUE)
     public ModelAndView cancel(@RequestParam("orderId") String orderId, Map<String, Object> map) {
         OrderDTO orderDTO = new OrderDTO();
         try {
