@@ -5,7 +5,6 @@ import com.imooc.bootsell.enums.ResultEnum;
 import com.imooc.bootsell.exception.SellException;
 import com.imooc.bootsell.service.OrderService;
 import com.imooc.bootsell.utils.StaticUtil;
-import com.imooc.bootsell.vo.ResultVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
 import java.util.Map;
 
 @RestController

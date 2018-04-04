@@ -3,9 +3,7 @@ package com.imooc.bootsell.controller;
 import com.imooc.bootsell.entity.ProductCategory;
 import com.imooc.bootsell.form.CategoryForm;
 import com.imooc.bootsell.service.CategoryService;
-import com.imooc.bootsell.utils.ResultVoUtil;
 import com.imooc.bootsell.utils.StaticUtil;
-import com.imooc.bootsell.vo.ResultVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -14,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
