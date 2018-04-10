@@ -15,9 +15,11 @@ import com.imooc.bootsell.repository.OrderMasterRepository;
 import com.imooc.bootsell.repository.ProductInfoRepository;
 import com.imooc.bootsell.service.OrderService;
 import com.imooc.bootsell.service.ProductService;
+import com.imooc.bootsell.service.PushMessageService;
 import com.imooc.bootsell.service.WebSocket;
 import com.imooc.bootsell.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
+import me.chanjar.weixin.mp.api.WxMpService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -49,6 +51,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private WebSocket webSocket;
+
+    @Autowired
+    private PushMessageService pushMessageService;
 
     /**
      * 创建订单
@@ -174,7 +179,7 @@ public class OrderServiceImpl implements OrderService {
             throw new SellException(ResultEnum.ORDER_UPDATE_FAIL);
         }
         //推送微信消息模版
-//        pushMessageService.orderStatus(orderDTO);
+        pushMessageService.orderStatus(orderDTO);
         return orderDTO;
     }
 

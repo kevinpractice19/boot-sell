@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
  * 买家商品
  */
 @RestController
-@RequestMapping(value = "/buyer/Product")
+@RequestMapping(value = "/buyer/product")
 public class BuyerProductController {
 
     @Autowired
