@@ -10,6 +10,7 @@ import com.imooc.bootsell.service.OrderService;
 import com.imooc.bootsell.utils.ResultVoUtil;
 import com.imooc.bootsell.utils.StaticUtil;
 import com.imooc.bootsell.vo.ResultVo;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -50,6 +51,7 @@ public class BuyerOrderController {
      * @return
      */
     //BindingResult用来做参数校验
+    @ApiOperation(value="获取用户详细信息", notes="根据url的id来获取用户详细信息")
     @RequestMapping(value = "/createBuyerOrder", method = RequestMethod.POST, produces = StaticUtil.APPLICATION_JSON_UTF8_VALUE)
     public ResultVo<Map<String, Object>> createBuyerOrder(@Valid OrderForm orderForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {

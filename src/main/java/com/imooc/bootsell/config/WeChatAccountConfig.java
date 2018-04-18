@@ -1,4 +1,4 @@
-package com.imooc.bootsell.cofig;
+package com.imooc.bootsell.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -9,7 +9,7 @@ import java.util.Map;
 @Data
 @Component
 @ConfigurationProperties(prefix = "wechat")
-public class WechatAccountConfig {
+public class WeChatAccountConfig {
 
     /**
      * 公众平台id

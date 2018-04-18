@@ -1,10 +1,9 @@
 package com.imooc.bootsell.service.impl;
 
-import com.imooc.bootsell.cofig.WechatAccountConfig;
+import com.imooc.bootsell.config.WeChatAccountConfig;
 import com.imooc.bootsell.dto.OrderDTO;
 import com.imooc.bootsell.service.PushMessageService;
 import lombok.extern.slf4j.Slf4j;
-import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,17 +16,17 @@ import java.util.List;
 @Service
 public class PushMessageServiceImpl implements PushMessageService {
 
-    @Autowired
-    private WxMpService wxMpService;
+//    @Autowired
+//    private WxMpService wxMpService;
 
     @Autowired
-    private WechatAccountConfig wechatAccountConfig;
+    private WeChatAccountConfig weChatAccountConfig;
 
 
     @Override
     public void orderStatus(OrderDTO orderDTO) {
         WxMpTemplateMessage wxMpTemplateMessage = new WxMpTemplateMessage();
-        wxMpTemplateMessage.setTemplateId(wechatAccountConfig.getTemplateId().get("orderStatus"));
+        wxMpTemplateMessage.setTemplateId(weChatAccountConfig.getTemplateId().get("orderStatus"));
         wxMpTemplateMessage.setToUser(orderDTO.getOrderId());
         List<WxMpTemplateData> wxMpTemplateData = Arrays.asList(
                 new WxMpTemplateData("first", "收货"),
@@ -40,7 +39,7 @@ public class PushMessageServiceImpl implements PushMessageService {
         );
         wxMpTemplateMessage.setData(wxMpTemplateData);
         try{
-            wxMpService.getTemplateMsgService().sendTemplateMsg(wxMpTemplateMessage);
+//            wxMpService.getTemplateMsgService().sendTemplateMsg(wxMpTemplateMessage);
         }catch (Exception e){
             log.error("[微信模版]发送失败,{}", e);
         }
