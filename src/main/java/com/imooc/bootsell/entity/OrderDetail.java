@@ -1,11 +1,14 @@
 package com.imooc.bootsell.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.imooc.bootsell.utils.serializer.Date2LongSerializer;
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.math.BigDecimal;
+import java.util.Date;
 
 @Entity
 @Data
@@ -27,6 +30,11 @@ public class OrderDetail {
 
     private String productIcon;  //商品小图
 
+    @JsonSerialize(using = Date2LongSerializer.class)
+    private Date createTime;
+
+    @JsonSerialize(using = Date2LongSerializer.class)
+    private Date updateTime;
 
 
 }

@@ -9,18 +9,28 @@ import com.imooc.bootsell.utils.StaticUtil;
 import com.imooc.bootsell.vo.ProductInfoVo;
 import com.imooc.bootsell.vo.ProductVo;
 import com.imooc.bootsell.vo.ResultVo;
+import com.sun.org.apache.regexp.internal.RE;
+import com.sun.xml.internal.ws.resources.HttpserverMessages;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * 买家商品
+ */
 @RestController
-@RequestMapping(value = "/buyerProduct")
+@RequestMapping(value = "/buyer/product")
 public class BuyerProductController {
 
     @Autowired
@@ -58,6 +68,16 @@ public class BuyerProductController {
         }
         return ResultVoUtil.success(productVoList);
     }
+
+//    @ApiOperation("ccehis")
+//    @ApiImplicitParams({
+//            @ApiImplicitParam(name = "productName", value = "组名称", required = true, paramType = "body", dataType = "int"),
+//   })
+//    @RequestMapping(value = "/test.do",method = RequestMethod.PUT)
+//    public String test(HttpServletRequest request){
+//        String productName = request.getParameter("productName");
+//        return productName;
+//    }
 
 
 }
