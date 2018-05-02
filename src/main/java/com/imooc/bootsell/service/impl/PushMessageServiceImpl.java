@@ -46,4 +46,9 @@ public class PushMessageServiceImpl implements PushMessageService {
     }
 
 
+    public void test(){
+        System.out.println("git dev测试");
+    }
+
+
 }
